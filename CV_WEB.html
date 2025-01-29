@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV Builder Pro | Create Professional Resumes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f5f7fb;
+        }
+
+        .navbar {
+            background-color: #2c3e50;
+            padding: 1rem 2rem;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 2rem;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, #2c3e50, #3498db);
+            color: white;
+        }
+
+        .builder-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 2rem;
+            padding: 1rem;
+        }
+
+        .cv-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .cv-preview {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2c3e50;
+            font-weight: 500;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+        }
+
+        .preview-section {
+            margin-bottom: 2rem;
+        }
+
+        .preview-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .preview-header h1 {
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+        }
+
+        .preview-header p {
+            color: #666;
+        }
+
+        .template-selector {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .template-card {
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .template-card:hover {
+            border-color: #3498db;
+        }
+
+        .btn {
+            background-color: #3498db;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+
+        .export-options {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .builder-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">CV Builder Pro</div>
+        <div class="nav-links">
+            <a href="#templates">Templates</a>
+            <a href="#examples">Examples</a>
+            <a href="#pricing">Pricing</a>
+            <a href="#login">Login</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Create Your Professional CV in Minutes</h1>
+        <p>Choose from modern templates and land your dream job</p>
+    </section>
+
+    <div class="builder-container">
+        <!-- CV Form -->
+        <div class="cv-form">
+            <h2>CV Information</h2>
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="fullName" placeholder="John Doe">
+            </div>
+            
+            <div class="form-group">
+                <label>Profession</label>
+                <input type="text" id="profession" placeholder="Software Engineer">
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="john@example.com">
+            </div>
+
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="tel" id="phone" placeholder="+1 234 567 890">
+            </div>
+
+            <div class="form-group">
+                <label>Summary</label>
+                <textarea id="summary" rows="4"></textarea>
+            </div>
+
+            <button class="btn" onclick="updatePreview()">Update Preview</button>
+        </div>
+
+        <!-- CV Preview -->
+        <div class="cv-preview">
+            <div class="preview-header">
+                <h1 id="previewName">John Doe</h1>
+                <p id="previewProfession">Software Engineer</p>
+                <p id="previewContact">john@example.com | +1 234 567 890</p>
+            </div>
+
+            <div class="preview-section">
+                <h3>Professional Summary</h3>
+                <p id="previewSummary">Experienced software engineer with 5+ years...</p>
+            </div>
+
+            <div class="template-selector">
+                <div class="template-card" onclick="selectTemplate(1)">
+                    <h4>Modern</h4>
+                    <p>Clean layout</p>
+                </div>
+                <div class="template-card" onclick="selectTemplate(2)">
+                    <h4>Professional</h4>
+                    <p>Traditional style</p>
+                </div>
+                <div class="template-card" onclick="selectTemplate(3)">
+                    <h4>Creative</h4>
+                    <p>Design-focused</p>
+                </div>
+            </div>
+
+            <div class="export-options">
+                <button class="btn" onclick="exportPDF()"><i class="fas fa-file-pdf"></i> Export as PDF</button>
+                <button class="btn" onclick="exportDOC()"><i class="fas fa-file-word"></i> Export as DOC</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function updatePreview() {
+            document.getElementById('previewName').textContent = 
+                document.getElementById('fullName').value || 'John Doe';
+            
+            document.getElementById('previewProfession').textContent = 
+                document.getElementById('profession').value || 'Professional Title';
+            
+            document.getElementById('previewContact').textContent = 
+                `${document.getElementById('email').value || 'email@example.com'} | 
+                 ${document.getElementById('phone').value || '+1 234 567 890'}`;
+            
+            document.getElementById('previewSummary').textContent = 
+                document.getElementById('summary').value || 'Professional summary...';
+        }
+
+        function selectTemplate(templateNumber) {
+            const templates = document.querySelectorAll('.template-card');
+            templates.forEach(t => t.style.borderColor = '#ddd');
+            templates[templateNumber-1].style.borderColor = '#3498db';
+        }
+
+        function exportPDF() {
+            alert('PDF export functionality would go here');
+        }
+
+        function exportDOC() {
+            alert('DOC export functionality would go here');
+        }
+
+        // Initialize with first template selected
+        selectTemplate(1);
+    </script>
+</body>
+</html>
